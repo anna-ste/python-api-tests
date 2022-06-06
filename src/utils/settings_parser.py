@@ -20,5 +20,15 @@ class SettingsParser:
             else:
                 setattr(self, key, value)
 
+    @staticmethod
+    def _load_config(file_name):
+        with open(configs_path.join(file_name).strpath) as config_file:
+            data = json.load(config_file)
+        return data
+
+    @property
+    def trading_pairs(self):
+        return self._load_config("trading_pairs.json")
+
 
 settings = SettingsParser()
