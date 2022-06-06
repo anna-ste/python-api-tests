@@ -8,4 +8,3 @@ Feature: As a user
     Then I should get 200 status code
     And Response data should be about XBT/USD trading pair
     And Trading_pair json schema should be valid
-
