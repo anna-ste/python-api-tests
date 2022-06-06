@@ -1,23 +1,17 @@
-import time
 from datetime import datetime
 
-import requests
 from behave import given, when, then
 
-from src.utils import request_helper
+from src.entities.ApiClient import ApiClient, SecureApiClient
 from src.utils import response_handler, schema_loader
 from src.utils.settings_parser import settings
 
-base_url = settings.base_url
-api_key = settings.api_key
-api_secret = settings.api_secret
 trading_pairs = settings.trading_pairs
-otp = settings.otp
 
 
 @when(u'I retrieve server time')
 def retrieve_server_time(context):
-    context.response = requests.get(base_url + '/0/public/Time')
+    context.response = context.client.get_server_time()
 
 
 @then(u'Server time should have {time_format} time format')
@@ -30,7 +24,7 @@ def assert_time_format(context, time_format):
 
 @given(u'I am a user')
 def step_impl(context):
-    pass
+    context.client = ApiClient()
 
 
 @then(u'I should get {code} status code')
@@ -42,7 +36,7 @@ def assert_status_code(context, code):
 @when(u'I request public info about trading pair {pair}')
 def step_impl(context, pair):
     pair_parameter = trading_pairs[pair]['request_parameter']
-    context.response = requests.get(base_url + f'/0/public/AssetPairs?pair={pair_parameter}')
+    context.response = context.client.get_trading_pair(pair_parameter)
 
 
 @then(u'Response data should be about {pair} trading pair')
@@ -63,17 +57,12 @@ def step_impl(context, name):
 
 @given(u'I am an authenticated user')
 def step_impl(context):
-    pass
+    context.client = SecureApiClient()
 
 
 @when(u'I retrieve open orders')
 def step_impl(context):
-    # Construct the request and print the result
-    context.response = request_helper.kraken_post_request(base_url, '/0/private/OpenOrders', {
-        "nonce": str(int(1000 * time.time())),
-        "otp": otp,
-        "trades": True
-    }, api_key, api_secret)
+    context.response = context.client.retrieve_open_orders()
 
 
 @then(u'I should get empty list of opened orders')
