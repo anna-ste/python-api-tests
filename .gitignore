@@ -1,0 +1,4 @@
+.idea/
+config/settings_local.json
+.DS_Store
+**/__pycache__/
