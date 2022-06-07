@@ -1,4 +1,5 @@
-Feature: As a user
+Feature: Trading pairs
+  As a user
   In order to trade
   I should be able to get public info about trading pairs
 
