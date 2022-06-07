@@ -16,6 +16,7 @@ It will handle all the system links, paths, pip linking automatically.
 * Ways of setting variables: 
     1. In `config` create file `settings_local.json` and copy content of `settings.json`. In `settings_local.json` you can set necessary values for variables used in framework such as `api_key`.
     2. Set environment variables. Use same naming as in `settings.json`, but capital letters, for example, if in `settings.json` we have `api_key`, environment variable should be named `API_KEY`.
+    3. Set api endpoint into base_url variable in settings.json
    
 
 * Priority of execution:
