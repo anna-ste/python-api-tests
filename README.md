@@ -44,7 +44,7 @@ To run in container
 
 `docker build -t anna2154/behave . `
 
-`docker run -v pwd:/code -p 8000:8000/tcp anna2154/behave`
+`docker run -p 8080:8080/tcp -it anna2154/behave  /bin/bash`
 
  Open reports reports
  
