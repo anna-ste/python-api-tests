@@ -16,6 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 ENV API_KEY="MpX1Tuy5OM5ufv9x9+nk4YGtSTVbje5gqWfTwUE7x4kZfyaAeItyNSDW"
 ENV API_SECRET="44Cz+wrcuaZQaOot0/V6FsjlG55GdDRGJWJJHqxhzeQ6xpmxHcwPfe+krtytGmdAZZiiYYtkwTof1l1490CjNQ=="
 ENV OTP="9X-5rE9h4VAz3kc"
+ENV BASE_URL="https://<api.example.com>"
 
 RUN wget https://github.com/allure-framework/allure2/releases/download/2.13.8/allure-2.13.8.zip
 RUN unzip allure-2.13.8.zip
