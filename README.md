@@ -29,10 +29,23 @@ It will handle all the system links, paths, pip linking automatically.
 3. Retrieve open orders on the account with configured 2FA
 
 
-## Execution and Reporting
+## Execution and Reporting locally
 
 To run your tests with behave
 behave -f allure -o reports -f pretty
 
 For reports
 allure serve reports
+
+
+## Execution and Reporting in docker container
+
+To run in container  
+
+`docker build -t anna2154/behave . `
+
+`docker run -v pwd:/code -p 8000:8000/tcp anna2154/behave`
+
+ Open reports reports
+ 
+ http://localhost:8080/index.html#
