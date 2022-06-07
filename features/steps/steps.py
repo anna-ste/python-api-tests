@@ -23,7 +23,7 @@ def assert_time_format(context, time_format):
 
 
 @given(u'I am a user')
-def step_impl(context):
+def basic_user(context):
     context.client = ApiClient()
 
 
@@ -34,13 +34,13 @@ def assert_status_code(context, code):
 
 
 @when(u'I request public info about trading pair {pair}')
-def step_impl(context, pair):
+def request_trading_pair(context, pair):
     pair_parameter = trading_pairs[pair]['request_parameter']
     context.response = context.client.get_trading_pair(pair_parameter)
 
 
 @then(u'Response data should be about {pair} trading pair')
-def step_impl(context, pair):
+def assert_pair_response(context, pair):
     expected_altname = trading_pairs[pair]['altname']
     actual_altname = context.response.json()['result'][trading_pairs[pair]['request_parameter']]['altname']
     assert expected_altname == actual_altname, 'Unexpected trading pair in response, expected %s, actual pair %s' % (
@@ -48,7 +48,7 @@ def step_impl(context, pair):
 
 
 @then("{name} json schema should be valid")
-def step_impl(context, name):
+def validate_json_schema(context, name):
     schema = schema_loader.get_json_schema(schema=name.lower())
 
     # check response corresponds to schema
@@ -56,16 +56,16 @@ def step_impl(context, name):
 
 
 @given(u'I am an authenticated user')
-def step_impl(context):
+def authenticated_user(context):
     context.client = SecureApiClient()
 
 
 @when(u'I retrieve open orders')
-def step_impl(context):
+def retrieve_open_orders(context):
     context.response = context.client.retrieve_open_orders()
 
 
 @then(u'I should get empty list of opened orders')
-def step_impl(context):
+def assert_open_orders_empty(context):
     expected_list = {}
     assert context.response.json()['result']['open'] == expected_list, 'List of orders is not empty'
