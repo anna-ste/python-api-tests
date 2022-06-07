@@ -52,7 +52,7 @@ def validate_json_schema(context, name):
     schema = schema_loader.get_json_schema(schema=name.lower())
 
     # check response corresponds to schema
-    assert response_handler.validate_json(context.response, schema), 'Category list schema is not valid'
+    assert response_handler.validate_json(context.response, schema), 'Schema is not valid'
 
 
 @given(u'I am an authenticated user')
